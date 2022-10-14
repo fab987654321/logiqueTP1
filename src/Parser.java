@@ -5,8 +5,8 @@ import java.util.Scanner;
 
 public class Parser {
     private final Scanner scanner;
-    public final List<Integer> etatClause = new ArrayList<>();            // etat d'une clause 0-1
-    public final List<Integer> etatLitteral = new ArrayList<>();           // etat d'un litteral 0-1-2
+    public final List<Integer> etatClause = new ArrayList<>();            // etat d'une clause 0-1 , -1: valeur par défaut
+    public final List<Integer> etatLitteral = new ArrayList<>();        //Etat d'un litteral 0: Pas testé, 1:Test decendant, 2: Teste montant ...      
     public final List<Integer> longueurClause = new ArrayList<>();        // nbLitteraux/clause
     public final List<List<Integer>> clauseLitteral = new ArrayList<>();   // clause 2 -> litteraux 1,4,8...
     public final List<List<Integer>> litteralClause = new ArrayList<>();   // litteral 1 -> clauses 2,3,8...
@@ -15,17 +15,21 @@ public class Parser {
         parser();
     }
 
-    public void parser() {
+    private void parser() {
         try {
             String firstLine = scanner.nextLine();
+            String[] clause;
             int nbClause = 0;
+
+            //Récupère ligne par ligne
             while(scanner.hasNext()) {
-                String[] clause = scanner.nextLine().split(" ");
+                clause = scanner.nextLine().split(" ");
                 longueurClause.add(clause.length);
                 clauseLitteral.add(new ArrayList<>());
                 for(String literal : clause) clauseLitteral.get(nbClause).add(Integer.parseInt(literal));
                 nbClause++;
             }
+
             for(int i=0;i<nbClause;i++) etatClause.add(-1);
             setLitteral(firstLine);
             scanner.close();
@@ -44,8 +48,8 @@ public class Parser {
         }
     }
     private void setLitteralClause(int i) {
-        for(List<Integer> list : clauseLitteral) {
+        for(List<Integer> list : clauseLitteral) 
             if(list.contains(i)) litteralClause.get(i).add(clauseLitteral.indexOf(list));
-        }
+        
     }
 }
