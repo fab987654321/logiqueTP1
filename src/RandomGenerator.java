@@ -13,7 +13,7 @@ public class RandomGenerator {
         this.nbVariable = nbVariable;
         this.nbClause = nbClause;
         try {
-            writer = new PrintWriter("D://bureau/Coding/Java/DPLL/testGenerator/test.txt", StandardCharsets.UTF_8);
+            writer = new PrintWriter("./test.txt", StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -27,10 +27,16 @@ public class RandomGenerator {
         writer.close();
     }
 
-    private String createClause() {  // literaux entre 0 et 2n-1
+    //FIXEME MARCHE PAS BIEN et c pas bien
+    private String createClause() {  // literaux entre 0 et 2n -1
         StringBuilder clause = new StringBuilder();
-        for(int i=0; i<random.nextInt(1,2*nbVariable+1); i++) { // nb aleatoire de literaux par ligne
-            clause.append(random.nextInt(0,2*nbVariable));
+        for(int i=0; i<random.nextInt(2*nbVariable) + 1; i++) { // nb aleatoire de literaux par ligne
+            int randomTampon = random.nextInt(2*nbVariable);
+            System.out.println(clause.toString());
+            while(clause.toString().contains(Integer.toString(randomTampon) ) )
+                randomTampon = random.nextInt(2*nbVariable);
+            
+            clause.append(randomTampon);
             clause.append(" ");
         }
         return clause.toString();

@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
         new RandomGenerator(3,5);
         try {
-            Parser parser = new Parser(new FileInputStream("testGenerator/test.txt"));
+            Parser parser = new Parser(new FileInputStream("./test.txt"));
             String ec = parser.etatClause.toString();
             String el = parser.etatLitteral.toString();
             String loc = parser.longueurClause.toString();
