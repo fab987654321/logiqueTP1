@@ -17,7 +17,9 @@ public class DPLL {
         this.litteralClause=litteralClause;
     }
     public Stack<Integer[]> solve() {
-        if(!testMonoLit()) return null;               // test monoLit a echoue  ( [a] et [-a] => insatisfaisable )
+        // test monoLit a echoue  ( [a] et [-a] => insatisfaisable )
+        //TODO ramplacer par un throws (si possible)
+        if(!testMonoLit()) return null;               
         testPurLit();
         //while (!isOver()) {
             // algo backtrack
@@ -54,7 +56,8 @@ public class DPLL {
         return false;
     }
     private void testPurLit() {
-        // Literaux purs
+        // Literaux purs CAD 
+        
     }
     private int getLitB(int lit) {    // return l'inverse de lit
         return lit%2==0 ? lit+1 : lit-1;
