@@ -1,0 +1,142 @@
+Classe utilisée :
+
+
+import java.awt.Color;
+
+
+ 
+
+
+ 
+
+
+import org.jfree.data.*;
+
+
+import org.jfree.chart.*;
+
+
+import org.jfree.chart.plot.*;
+
+
+import org.jfree.chart.plot.PlotOrientation;
+
+
+ 
+
+
+Code :
+
+
+ 
+
+
+//declaration de 2 objets pour les courbes
+
+
+XYSeries courbe1 = new XYSeries("COURBE1");
+
+
+XYSeries courbe2 = new XYSeries("COURBE2");
+
+
+ 
+
+
+// boucle qui ajoute les points des courbes
+
+
+for ()
+
+
+        {
+
+
+            courbe1.add(X1,Y1);
+
+
+            courbe2.add(X2,Y2) ;
+
+
+        }
+
+
+ 
+
+
+// init de l’objet permettant de créer le graph
+
+
+XYSeriesCollection xyDataset = new XYSeriesCollection(courbe1);
+
+
+ 
+
+
+//ajout de la 2{{exp|ème}} courbe du graph
+
+
+xyDataset.addSeries(courbe2);
+
+
+ 
+
+
+// init de l’objet graph
+
+
+JFreeChart Graph = ChartFactory.createXYLineChart
+
+
+                                    (title,  // Title
+
+
+                                    absTitle,           // X-Axis label
+
+
+                                    ordTitle,           // Y-Axis label
+
+
+                                    (XYDataset)xyDataset,          // Dataset
+
+
+                                   PlotOrientation.VERTICAL,         // Orientation
+
+
+                                   true,               // Show legend
+
+
+                                    true,              // Tools Tips
+
+
+                                    false               // Urls) ;
+
+
+ 
+
+
+//init de la couleur de fond du graphe
+
+
+      Color gris = new Color(200,200,200);
+
+
+      Graph.setBackgroundPaint(gris);
+
+
+ 
+
+
+// chemin d’accès au fichier JPEG
+
+
+String repertoirePic = ‘C:\..’ ;
+
+
+ 
+
+
+//generation du fichier JPEG
+
+
+ChartUtilities.saveChartAsJPEG(new File(repertoirePic+"/"+graphId), Graph, 500, 300);
